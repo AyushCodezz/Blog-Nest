@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+ 
+{% block title %}
+    {{ page_title }} | Ink-Space
+{% endblock %}
+ 
+{% block content %}
+ 
+<div class="row justify-content-center">
+ 
+    <div class="col-lg-8">
+ 
+        <div class="card shadow-sm">
+ 
+            <div class="card-body p-4">
+ 
+                <h1 class="mb-4">
+                    {{ page_title }}
+                </h1>
+ 
+                <form method="post">
+ 
+                    {% csrf_token %}
+ 
+                    {{ form.as_p }}
+ 
+                    <button
+                        type="submit"
+                        class="btn btn-dark"
+                    >
+                        Save Post
+                    </button>
+ 
+                    <a
+                        href="{% url 'post_list' %}"
+                        class="btn btn-secondary"
+                    >
+                        Cancel
+                    </a>
+ 
+                </form>
+ 
+            </div>
+ 
+        </div>
+ 
+    </div>
+ 
+</div>
+ 
+{% endblock %}

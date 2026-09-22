@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {{ post.title }} - Ink-Space
+{% endblock %}
+
+
+{% block content %}
+
+<div class="row justify-content-center">
+
+    <div class="col-lg-8">
+
+        <article class="card shadow-sm">
+
+            <div class="card-body p-4">
+
+                <!-- Post Title -->
+                <h1 class="mb-3">
+                    {{ post.title }}
+                </h1>
+
+
+                <!-- Author and Date -->
+                <div class="text-muted mb-4">
+
+                    <span>
+                        By {{ post.author.username }}
+                    </span>
+
+                    {% if post.created_at %}
+                        <span class="mx-2">•</span>
+
+                        <span>
+                            {{ post.created_at|date:"F d, Y" }}
+                        </span>
+                    {% endif %}
+
+                </div>
+
+
+                <!-- Post Content -->
+                <div class="mb-4">
+
+                    {{ post.content|linebreaks }}
+
+                </div>
+
+
+                <!-- Actions -->
+                <div class="d-flex gap-2">
+
+                    <a
+                        href="{% url 'post_list' %}"
+                        class="btn btn-secondary"
+                    >
+                        Back to Blog
+                    </a>
+
+
+                    {% if user.is_authenticated and post.author == user %}
+
+                        <a
+                            href="{% url 'post_edit' post.id %}"
+                            class="btn btn-warning"
+                        >
+                            Edit
+                        </a>
+
+
+                        <a
+                            href="{% url 'post_delete' post.id %}"
+                            class="btn btn-danger"
+                        >
+                            Delete
+                        </a>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </article>
+
+    </div>
+
+</div>
+
+{% endblock %}
