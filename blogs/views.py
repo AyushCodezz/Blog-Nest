@@ -5,7 +5,7 @@ from .forms import PostForm
 from .models import Post
 from .services import (
     create_post,
-    delete_post,
+    delete_post as delete_post_service,
     get_all_posts,
     get_post_by_id,
     update_post,
@@ -27,7 +27,7 @@ def post_detail(request, post_id):
 
     return render(
         request,
-        "blogs/post_detail.html",
+        "blogs/post_details.html",
         {"post": post},
     )
 
@@ -94,7 +94,6 @@ def delete_post(request, post_id):
         return redirect("post_detail", post_id=post.id)
 
     if request.method == "POST":
-        delete_post_service = delete_post
         delete_post_service(post)
 
         return redirect("post_list")
